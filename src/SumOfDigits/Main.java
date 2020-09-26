@@ -4,12 +4,14 @@ import java.util.Scanner;
 
 import static java.lang.Integer.max;
 import static java.lang.Integer.min;
-import java.lang.Math;
+import java.util.Random;
 
 public class Main {
 
 
     static int spf[];
+    static Random random = new Random();
+
 
 
     public static int digitsSum(int x) {
@@ -18,6 +20,9 @@ public class Main {
         return x%10 + digitsSum(x/10);
 
     }
+
+
+
 
     public static int gcd(int a, int b) {
         int max = max(a,b);
@@ -28,11 +33,31 @@ public class Main {
     }
 
 
+
+    public static int power(int a, int n, int m) {
+
+        int result = 1;
+
+        a = a % m;
+
+        while (n > 0) {
+            if (n % 2 == 1)
+                result = (result * a) % m;
+            n = n / 2;
+            a = (a * a) % m;
+        }
+
+        return result;
+
+    }
+
+
+
     public static boolean isPrime(int p) {
-        int a = 2 + (int)(Math.random() * (p-1));
+        int a = 2 + random.nextInt(p-2);
         if (gcd(a,p) != 1)
             return false;
-        return Math.pow(a,p-1) % p == 1;
+        return power(a,p-1, p) == 1;
     }
 
 
@@ -60,6 +85,7 @@ public class Main {
     }
 
 
+
     public static void printPrimeFactors(int x) {
 
         sieve(x);
@@ -70,6 +96,7 @@ public class Main {
         }
 
     }
+
 
 
     public static void main(String[] args) {
